@@ -2,7 +2,7 @@
 
 ![logo](_media/icon.png)
 
-# Mawaqit Api <small>1.0</small>
+# Mawaqit Api <small>v1.2.0</small>
 
 > Rest API for fetching prayer times from Mawaqit.net.
 
