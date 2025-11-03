@@ -7,25 +7,26 @@ from slowapi.errors import RateLimitExceeded
 from controllers.mawaqitController import router as mawaqitRouter
 from config.settings import settings
 
-def create_app() -> FastAPI:
-    app = FastAPI(title='Mawaqit Api', debug=False, read_root="/")
-    # --- Ajoute ceci juste après app = FastAPI() ---
-
+# Import CORS en tête
 from fastapi.middleware.cors import CORSMiddleware
 
-origins = [
-    "https://decines-prayer-clock.lovable.app/",      # <-- REMPLACE par ton URL Lovable (ex: "https://monapp.lovable.app")
-]
+def create_app() -> FastAPI:
+    app = FastAPI(title='Mawaqit Api', debug=False, read_root="/")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,            # autorise uniquement les origines listées
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["*"],
-)
-# ----------------------------------------------------
+    # === CONFIG CORS (insérée correctement DANS create_app) ===
+    origins = [
+        "https://decines-prayer-clock.lovable.app",  # <-- PAS de slash final
+        # "http://localhost:5173",                   # <-- décommente si tu veux tester en local
+    ]
 
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,            # autorise uniquement les origines listées
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["*"],
+    )
+    # ========================================================
 
     if settings.ENABLE_REDIS:
         storage_uri = settings.REDIS_URI
