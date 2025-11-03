@@ -16,7 +16,7 @@ def create_app() -> FastAPI:
     # === CONFIG CORS (insérée correctement DANS create_app) ===
     origins = [
         "https://mosquee-arrahmane-web.lovable.app",   # ton site Lovable
-        "https://lovable.dev",   # <-- PAS de slash final
+        "https://mosquee-arrahmane-web.vercel.app",   # <-- PAS de slash final
         # "http://localhost:5173",                   # <-- décommente si tu veux tester en local
     ]
 
