@@ -1,9 +1,16 @@
-FROM python:3.9.6-alpine3.14
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY . /app/
+# Copie et installe les dépendances
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r requirements.txt
+# Copie tout le code
+COPY . .
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+# Expose le port 8080
+EXPOSE 8080
+
+# Commande de démarrage
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
