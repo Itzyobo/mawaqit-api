@@ -1,0 +1,22 @@
+app = "ton-app-name"  # Sera déjà rempli
+primary_region = "cdg"  # Ta région
+
+[build]
+
+[env]
+  PORT = "8080"
+  ENABLE_AUTH = "False"
+  ENABLE_REDIS = "False"
+  RATE_LIMIT = "60/minute"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  memory = '256mb'  # 512 MB pour plus de stabilité
+  cpu_kind = 'shared'
+  cpus = 1
